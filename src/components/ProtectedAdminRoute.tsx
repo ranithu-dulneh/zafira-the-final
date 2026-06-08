@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { app } from "@/lib/firebase";
 import { useRouter, usePathname } from "next/navigation";
 
 export default function ProtectedAdminRoute({ children }: { children: React.ReactNode }) {
@@ -11,6 +11,7 @@ export default function ProtectedAdminRoute({ children }: { children: React.Reac
   const pathname = usePathname();
 
   useEffect(() => {
+    const auth = getAuth(app);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setIsAuthenticated(true);

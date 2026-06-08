@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { app } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 
 export default function AdminLogin() {
@@ -18,6 +18,7 @@ export default function AdminLogin() {
     setError("");
 
     try {
+      const auth = getAuth(app);
       await signInWithEmailAndPassword(auth, email, password);
       router.push("/admin");
     } catch (err: any) {
