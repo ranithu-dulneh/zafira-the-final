@@ -15,6 +15,11 @@ const firebaseConfig = {
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 const storage = getStorage(app);
-const auth = getAuth(app);
 
-export { app, db, storage, auth };
+// Use conditional initialization to prevent auth/invalid-api-key crashing
+// during Next.js static prerendering where env vars aren't present.
+export const auth = (typeof window !== "undefined" && process.env.NEXT_PUBLIC_FIREBASE_API_KEY)
+  ? getAuth(app)
+  : null as any;
+
+export { app, db, storage };
