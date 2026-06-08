@@ -47,8 +47,10 @@ export default function AdminProducts() {
       });
       setNewSubCategory({ name: "", parent: "mens" });
       fetchCategories();
-    } catch (err) {
+      alert("Category added successfully!");
+    } catch (err: any) {
       console.error("Error adding category", err);
+      alert(`Failed to add category: ${err.message}`);
     }
   };
 
@@ -56,8 +58,9 @@ export default function AdminProducts() {
     try {
       await deleteDoc(doc(db, "categories", id));
       fetchCategories();
-    } catch (err) {
+    } catch (err: any) {
       console.error("Error deleting category", err);
+      alert(`Failed to delete category: ${err.message}`);
     }
   };
 
