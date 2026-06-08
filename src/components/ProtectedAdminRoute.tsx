@@ -13,7 +13,7 @@ export default function ProtectedAdminRoute({ children }: { children: React.Reac
   useEffect(() => {
     const auth = getAuth(app);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user && user.email === "ranithudulneth@gmail.com") {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
