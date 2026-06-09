@@ -9,7 +9,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
 
   // If login page, don't show sidebar
-  if (pathname === "/admin/login") {
+  if (pathname === "/login") {
     return <>{children}</>;
   }
 
