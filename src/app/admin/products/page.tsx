@@ -21,6 +21,7 @@ export default function AdminProducts() {
     subCategory: "",
   });
   const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [pastedImageUrls, setPastedImageUrls] = useState("");
 
   useEffect(() => {
     fetchCategories();
@@ -86,6 +87,14 @@ export default function AdminProducts() {
         imageUrls.push(url);
       }
 
+      // Add pasted image URLs
+      const parsedPastedUrls = pastedImageUrls
+        .split(/[\n,]+/)
+        .map((url) => url.trim())
+        .filter((url) => url.length > 0);
+
+      imageUrls.push(...parsedPastedUrls);
+
       await addDoc(collection(db, "products"), {
         title: productForm.title,
         description: productForm.description,
@@ -103,6 +112,7 @@ export default function AdminProducts() {
         title: "", description: "", basePrice: "", stockCount: "", primaryCategory: "mens", subCategory: ""
       });
       setImageFiles([]);
+      setPastedImageUrls("");
     } catch (err) {
       console.error("Error adding product", err);
       alert("Failed to add product");
@@ -242,6 +252,17 @@ export default function AdminProducts() {
                  {imageFiles.map((f, i) => <span key={i} className="text-xs bg-zafira-slate/10 px-2 py-1">{f.name}</span>)}
               </div>
             )}
+
+            <div className="mt-4">
+              <label className="text-sm uppercase tracking-wide">Or Paste Image URLs</label>
+              <textarea
+                value={pastedImageUrls}
+                onChange={(e) => setPastedImageUrls(e.target.value)}
+                placeholder="Paste image URLs here (separated by commas or newlines)"
+                rows={3}
+                className="w-full border border-zafira-slate/20 p-2 outline-none mt-2 resize-none"
+              />
+            </div>
           </div>
 
           <button type="submit" disabled={loading} className="w-full py-4 bg-zafira-slate text-white uppercase tracking-widest text-sm hover:bg-zafira-gold transition-colors disabled:opacity-50">
