@@ -124,6 +124,7 @@ export default function Login() {
 
         <div className="space-y-4">
           <button
+            type="button"
             onClick={handleGoogleLogin}
             disabled={loading}
             className="w-full py-4 bg-white border border-zafira-slate/20 text-zafira-slate uppercase tracking-widest text-sm hover:border-zafira-gold transition-colors disabled:opacity-50 flex items-center justify-center space-x-2"
@@ -138,6 +139,7 @@ export default function Login() {
           </button>
 
           <button
+            type="button"
             onClick={handleGuestLogin}
             disabled={loading}
             className="w-full py-4 bg-zafira-cream text-zafira-slate uppercase tracking-widest text-sm hover:bg-zafira-gold/10 transition-colors disabled:opacity-50"

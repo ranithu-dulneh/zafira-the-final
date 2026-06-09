@@ -130,6 +130,7 @@ export default function SignUp() {
 
         <div className="space-y-4">
           <button
+            type="button"
             onClick={handleGoogleSignUp}
             disabled={loading}
             className="w-full py-4 bg-white border border-zafira-slate/20 text-zafira-slate uppercase tracking-widest text-sm hover:border-zafira-gold transition-colors disabled:opacity-50 flex items-center justify-center space-x-2"
