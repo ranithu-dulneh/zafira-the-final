@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Search, ShoppingBag, User } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 import { useState, useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -10,6 +11,7 @@ import { Category, ProductCategory } from "@/types";
 
 export default function Header() {
   const { cart, setIsCartDrawerOpen } = useCart();
+  const { user, isAdmin } = useAuth();
   const [categories, setCategories] = useState<Category[]>([]);
   const [activeTab, setActiveTab] = useState<ProductCategory | null>(null);
 
@@ -60,7 +62,7 @@ export default function Header() {
 
           {/* User Actions (Right) */}
           <div className="flex items-center justify-end space-x-6 flex-1">
-            <Link href="/admin" className="hidden md:flex text-zafira-slate hover:text-zafira-gold transition-colors">
+            <Link href={user ? (isAdmin ? "/admin" : "/account") : "/login"} className="hidden md:flex text-zafira-slate hover:text-zafira-gold transition-colors">
               <User className="w-5 h-5" />
             </Link>
             <button

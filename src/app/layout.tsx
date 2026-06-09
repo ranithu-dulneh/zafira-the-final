@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 import Header from "@/components/Header";
 import CartDrawer from "@/components/CartDrawer";
 
@@ -20,13 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-zafira-cream text-zafira-slate flex flex-col min-h-screen pt-20`}>
-        <CartProvider>
-          <Header />
-          <CartDrawer />
-          <main className="flex-grow">
-            {children}
-          </main>
-        </CartProvider>
+        <AuthProvider>
+          <CartProvider>
+            <Header />
+            <CartDrawer />
+            <main className="flex-grow">
+              {children}
+            </main>
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );

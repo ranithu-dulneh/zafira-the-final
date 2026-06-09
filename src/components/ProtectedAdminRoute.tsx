@@ -13,12 +13,12 @@ export default function ProtectedAdminRoute({ children }: { children: React.Reac
   useEffect(() => {
     const auth = getAuth(app);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user && user.email === "ranithudulneth@gmail.com") {
+      if (user && (user.email === "ranithudulneth@gmail.com" || user.email === "zafira@gmail.com")) {
         setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
-        if (pathname !== "/admin/login") {
-          router.push("/admin/login");
+        if (pathname !== "/login") {
+          router.push("/login");
         }
       }
     });
@@ -36,7 +36,7 @@ export default function ProtectedAdminRoute({ children }: { children: React.Reac
     );
   }
 
-  if (!isAuthenticated && pathname !== "/admin/login") {
+  if (!isAuthenticated && pathname !== "/login") {
     return null; // Will redirect in useEffect
   }
 
