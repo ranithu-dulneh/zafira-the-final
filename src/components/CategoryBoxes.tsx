@@ -8,13 +8,13 @@ const TypewriterText = ({ text, delay = 0 }: { text: string, delay?: number }) =
   const [displayText, setDisplayText] = useState("");
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
+    let intervalId: NodeJS.Timeout | undefined;
 
     // Initial delay before starting the typewriter effect
     const initialDelay = setTimeout(() => {
       let currentIndex = 0;
 
-      const intervalId = setInterval(() => {
+      intervalId = setInterval(() => {
         if (currentIndex <= text.length) {
           setDisplayText(text.slice(0, currentIndex));
           currentIndex++;
@@ -23,12 +23,11 @@ const TypewriterText = ({ text, delay = 0 }: { text: string, delay?: number }) =
         }
       }, 100); // Speed of typing
 
-      return () => clearInterval(intervalId);
     }, delay);
 
     return () => {
       clearTimeout(initialDelay);
-      clearTimeout(timeoutId);
+      clearInterval(intervalId);
     };
   }, [text, delay]);
 
