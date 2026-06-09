@@ -5,6 +5,7 @@ import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { Product } from "@/types";
 import ProductCard from "@/components/ProductCard";
+import CategoryBoxes from "@/components/CategoryBoxes";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -57,6 +58,9 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      {/* Categories Section */}
+      <CategoryBoxes />
 
       {/* Featured Collection */}
       <section className="py-20 md:py-32 px-4 md:px-8 container mx-auto">

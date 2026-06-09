@@ -8,11 +8,6 @@ import ProtectedAdminRoute from "@/components/ProtectedAdminRoute";
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  // If login page, don't show sidebar
-  if (pathname === "/login") {
-    return <>{children}</>;
-  }
-
   const navItems = [
     { label: "Dashboard", href: "/admin" },
     { label: "Orders", href: "/admin/orders" },

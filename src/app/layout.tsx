@@ -5,6 +5,7 @@ import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import Header from "@/components/Header";
 import CartDrawer from "@/components/CartDrawer";
+import MobileNav from "@/components/MobileNav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-zafira-cream text-zafira-slate flex flex-col min-h-screen pt-20`}>
+      <body className={`${inter.className} bg-zafira-cream text-zafira-slate flex flex-col min-h-screen pt-20 pb-16 md:pb-0`}>
         <AuthProvider>
           <CartProvider>
             <Header />
@@ -28,6 +29,7 @@ export default function RootLayout({
             <main className="flex-grow">
               {children}
             </main>
+            <MobileNav />
           </CartProvider>
         </AuthProvider>
       </body>
